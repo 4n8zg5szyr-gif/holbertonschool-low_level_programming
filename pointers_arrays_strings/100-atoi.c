@@ -20,20 +20,19 @@ int _atoi(char *s)
 	while (s[i] != '\0')
 	{
 		if (s[i] == '-')
-		{
 			sign = sign * -1;
-		}
 		else if (s[i] >= '0' && s[i] <= '9')
 		{
 			found = 1;
-			number = number * 10 + (s[i] - '0');
+			number = number * 10 - (s[i] - '0');
 		}
 		else if (found == 1)
-		{
 			break;
-		}
 		i++;
 	}
 
-	return (number * sign);
+	if (sign == 1)
+		return (-number);
+
+	return (number);
 }
