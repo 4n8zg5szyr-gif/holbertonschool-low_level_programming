@@ -2,40 +2,40 @@
 
 ## Measurement Methodology
 
-The experiments used the C `clock()` function to measure CPU execution time. The elapsed CPU time was calculated by subtracting the starting clock value from the ending clock value and dividing the result by `CLOCKS_PER_SEC`.
+The experiments use execution time as a performance indicator. The baseline loop was executed three times, with 100,000,000 iterations per run. Its recorded execution times were 0.226186 seconds, 0.227812 seconds, and 0.227386 seconds. The average execution time was 0.227128 seconds.
 
-Each experiment was executed three times. The recorded results were then used to calculate average execution times.
+The algorithm comparison measured a naive algorithm and a single-pass algorithm. Their recorded average execution times were 2.766371 seconds and 0.000106 seconds respectively. The reported relative performance indicates that the naive algorithm was approximately 26,016 times slower.
 
-The baseline experiment executed 100,000,000 loop iterations. The algorithm comparison experiment evaluated two methods for counting even numbers: a naive implementation using nested loops and a single-pass implementation using one loop. Finally, the controlled instrumentation experiment measured three separate functions: `build_dataset()`, `process_dataset()`, and `reduce_checksum()`.
+The instrumentation experiment was executed three times. It measured the total execution time and three separate phases: BUILD_DATA, PROCESS, and REDUCE. The total times were 0.000777, 0.000786, and 0.000718 seconds. The average total time was approximately 0.000760 seconds.
 
 ## Observed Performance Differences
 
-The baseline loop completed 100,000,000 iterations in an average of 0.227128 seconds. Its three recorded execution times were 0.226186, 0.227812, and 0.227386 seconds. The relatively small differences show that the measured execution time remained consistent across these runs.
+The baseline loop showed relatively consistent execution times across its three runs. The difference between its slowest and fastest runs was 0.001626 seconds. This indicates that the measured runtime remained close to 0.227 seconds during these executions.
 
-The algorithm comparison showed a much larger performance difference. The naive algorithm had an average execution time of 2.766371 seconds, while the single-pass algorithm averaged approximately 0.000106333 seconds. The naive implementation was approximately 26,016 times slower.
+The algorithm comparison showed a much larger difference. The naive algorithm averaged 2.766371 seconds, while the single-pass algorithm averaged 0.000106 seconds. The measurements therefore show a substantial runtime advantage for the single-pass implementation in this experiment.
 
-Both implementations produced results for counting even numbers, but the naive implementation used nested loops with O(n²) time complexity. The single-pass implementation used one loop with O(n) time complexity. These results demonstrate the significant runtime impact of avoiding repeated operations.
-
-In the instrumentation experiment, the average total execution time was approximately 0.000760333 seconds. The average times for the individual phases were 0.000296333 seconds for BUILD_DATA, 0.000318667 seconds for PROCESS, and 0.000139 seconds for REDUCE. PROCESS was the longest measured phase in all three runs.
+However, the recorded results were different: the naive algorithm returned 625025000, while the single-pass algorithm returned 25000. This means the outputs must be checked before concluding that both implementations performed exactly the same computation.
 
 ## Relation Between Runtime and Energy Consumption
 
-Execution time can help evaluate software efficiency because a program that finishes sooner may require fewer CPU resources over time. However, runtime alone does not establish how much electrical energy a program consumes.
+Execution time can help engineers study computational efficiency. When two implementations perform equivalent work on the same hardware, a shorter runtime may indicate that the processor is active for less time.
 
-The experiments measured CPU time using `clock()`. They did not measure electrical power in watts or energy in joules. Therefore, the results can demonstrate differences in execution performance, but they cannot prove that one implementation consumed a specific amount of energy or was more energy-efficient.
+The algorithm comparison demonstrates a large difference in measured execution time. If both implementations performed equivalent work, this difference could be relevant when investigating energy efficiency.
+
+However, execution time alone does not measure electrical energy consumption. Energy depends on both power usage and the duration of operation. None of the recorded experiments directly measured electrical power or energy. Therefore, these results cannot establish an exact energy saving.
 
 ## Limitations of the Experiment
 
-Several limitations affect the interpretation of these results. First, each experiment was executed only three times, which provides a limited sample. System activity, processor scheduling, and available CPU resources may influence the measurements.
+The experiments were conducted using a limited number of runs: three for the baseline loop and instrumentation experiment. A small sample may not represent performance under all system conditions.
 
-Second, the experiments were performed in a particular computing environment. Different processors, compiler versions, compiler optimization settings, and operating systems could produce different execution times.
+Execution times can also be affected by background processes and available CPU resources. In addition, the algorithm comparison contains different reported output values, so equivalence between the two computations has not been established.
 
-Third, the instrumentation experiment measures very short operations. The timing calls themselves may represent a noticeable part of the measured duration. Finally, no direct power or energy measurement equipment was used.
+Finally, the experiments use CPU execution time rather than a direct energy measurement. No electrical power meter or energy-monitoring instrument was used.
 
 ## Practical Engineering Takeaway
 
-The experiments show that algorithm design has a major impact on execution time. In particular, replacing a nested-loop solution with a single-pass solution reduced the measured runtime dramatically.
+The measurements show that algorithm design can have a major impact on execution time. In this comparison, the single-pass algorithm was substantially faster than the naive algorithm according to the recorded averages.
 
-Software engineers should consider algorithmic complexity, avoid unnecessary repeated operations, and measure performance before and after optimization. Instrumentation can also identify which parts of a program take the most CPU time.
+Engineers should consider algorithm complexity, avoid unnecessary repeated work, and measure performance using repeated tests. They should also verify that compared implementations produce equivalent results.
 
-For greener software engineering, runtime optimization is a useful starting point, but it should be combined with direct energy measurements before making claims about actual electricity consumption.
+For green computing, runtime measurements are useful indicators, but they should be combined with direct power or energy measurements before making claims about actual energy savings.
