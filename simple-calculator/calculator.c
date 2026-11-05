@@ -3,6 +3,10 @@
 /**
  * main - Entry point of the simple calculator
  *
+ * Description: A and B are read as integers. Add, subtract and
+ * multiply print an integer result. Divide prints a decimal result
+ * (printed with %g, so 10 / 4 gives 2.5 and 10 / 2 gives 5).
+ *
  * Return: Always 0 (Success)
  */
 int main(void)
@@ -44,21 +48,25 @@ int main(void)
 			continue;
 		}
 
-		if (choice >= 1 && choice <= 3)
-		{
-			printf("A: ");
-			if (scanf("%d", &a) != 1)
-				return (1);
-			printf("B: ");
-			if (scanf("%d", &b) != 1)
-				return (1);
+		printf("A: ");
+		if (scanf("%d", &a) != 1)
+			return (1);
+		printf("B: ");
+		if (scanf("%d", &b) != 1)
+			return (1);
 
-			if (choice == 1)
-				printf("Result: %d\n", a + b);
-			else if (choice == 2)
-				printf("Result: %d\n", a - b);
+		if (choice == 1)
+			printf("Result: %d\n", a + b);
+		else if (choice == 2)
+			printf("Result: %d\n", a - b);
+		else if (choice == 3)
+			printf("Result: %d\n", a * b);
+		else
+		{
+			if (b == 0)
+				printf("Error: division by zero\n");
 			else
-				printf("Result: %d\n", a * b);
+				printf("Result: %g\n", (double)a / b);
 		}
 	}
 
