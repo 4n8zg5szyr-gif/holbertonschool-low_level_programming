@@ -19,3 +19,4 @@ This project introduces command line arguments in C.
 ## Files
 
 - 0-whatsmyname.c: Prints the program name.
+- 4-add.c: Adds positive numbers passed as arguments.
