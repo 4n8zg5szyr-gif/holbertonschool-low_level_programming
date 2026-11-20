@@ -24,3 +24,4 @@ If n is equal to 0, the function returns 0.
 
 - 1-print_numbers.c: Prints a list of integers separated by a string.
 - 2-print_strings.c: Prints strings separated by a specified string.
+- 3-print_all.c: Prints different types of arguments.
