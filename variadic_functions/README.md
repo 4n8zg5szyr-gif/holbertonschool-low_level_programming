@@ -23,3 +23,4 @@ Returns the sum of all the integers passed to the function.
 If n is equal to 0, the function returns 0.
 
 - 1-print_numbers.c: Prints a list of integers separated by a string.
+- 2-print_strings.c: Prints strings separated by a specified string.
